@@ -74,3 +74,107 @@ function verificarIdadeTernario() {
     document.getElementById("ResultadoTernario").textContent = situacao;
  
 }
+
+function calcularDesconto() {
+ 
+    // Pega o valor digitado no HTML
+    const valorCompra = Number(
+        document.getElementById("valorCompra").value
+    );
+ 
+    const clienteVip =
+        document.getElementById("clienteVip").value === "true";
+ 
+ 
+    let percentualDesconto = 0;
+ 
+ 
+    if (valorCompra > 500) {
+ 
+        percentualDesconto = 20;
+ 
+    } else if (valorCompra >= 200) {
+ 
+        percentualDesconto = 10;
+ 
+    } else {
+ 
+        percentualDesconto = 0;
+    }
+ 
+ 
+    if (clienteVip && percentualDesconto > 0) {
+ 
+        percentualDesconto += 5;
+    }
+ 
+ 
+   
+    const valorDesconto =
+        valorCompra * (percentualDesconto / 100);
+ 
+ 
+    const valorFinal =
+        valorCompra - valorDesconto;
+ 
+ 
+    document.getElementById("resultadoCompra").innerHTML =
+        "Valor da compra: R$ " + valorCompra.toFixed(2);
+ 
+    document.getElementById("resultadoDesconto").innerHTML =
+        "Desconto: R$ " + valorDesconto.toFixed(2) +
+        " (" + percentualDesconto + "%)";
+ 
+    document.getElementById("resultadoFinal").innerHTML =
+        "Valor final: R$ " + valorFinal.toFixed(2);
+}
+
+const tarefa = {
+    titulo: "Estudar JavaScript",
+    concluida: false
+};
+
+
+function mostrarTarefa() {
+
+    document.getElementById("tituloTarefa").innerHTML =
+        "Tarefa: " + tarefa.titulo;
+
+    document.getElementById("statusTarefa").innerHTML =
+        "Concluída: " + (tarefa.concluida ? "Sim" : "Não");
+}
+
+
+function marcarComoConcluida(tarefa) {
+
+ 
+    if (!tarefa) {
+        document.getElementById("mensagem").innerHTML =
+            "Nenhuma tarefa foi informada!";
+        return;
+    }
+
+
+    
+    if (tarefa.concluida) {
+        document.getElementById("mensagem").innerHTML =
+            "Esta tarefa já foi concluída!";
+        return;
+    }
+
+
+    
+    tarefa.concluida = true;
+
+
+  
+    document.getElementById("mensagem").innerHTML =
+        "Tarefa concluída com sucesso!";
+
+
+    
+    mostrarTarefa();
+}
+
+
+mostrarTarefa();
